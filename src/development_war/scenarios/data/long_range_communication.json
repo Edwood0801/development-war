@@ -1,0 +1,91 @@
+{
+  "id": "long_range_communication",
+  "title": "Long-Range Communication Challenge",
+  "objective": "Develop a reliable long-range communication system within 12 turns.",
+  "max_turns": 12,
+  "probe_cost": {"money": 3},
+  "events": {
+    "probability": 0.08,
+    "shocks": [
+      {"name": "supply_disruption", "resource": "materials", "loss_fraction": 0.15, "description": "Raw-material supply chain disrupted"},
+      {"name": "research_brain_drain", "resource": "research", "loss_fraction": 0.15, "description": "Key researchers lost to other work"},
+      {"name": "financial_shock", "resource": "money", "loss_fraction": 0.10, "description": "Unexpected financial strain"}
+    ]
+  },
+  "technologies": [
+    {"id": "basic_electronics", "name": "Basic Electronics", "category": "Electronics", "cost": {"money": 10, "materials": 4, "research": 5}, "risk": 0.05},
+    {"id": "advanced_electronics", "name": "Advanced Electronics", "category": "Electronics", "prerequisites": ["basic_electronics"], "cost": {"money": 20, "materials": 10, "research": 12}, "risk": 0.10},
+    {"id": "basic_communication", "name": "Basic Communication", "category": "Communication", "cost": {"money": 10, "materials": 4, "research": 5}, "risk": 0.05},
+    {"id": "radio_systems", "name": "Radio Systems", "category": "Communication", "prerequisites": ["basic_communication", "basic_electronics"], "cost": {"money": 15, "materials": 6, "research": 8}, "risk": 0.05},
+    {"id": "basic_computing", "name": "Basic Computing", "category": "Computing", "cost": {"money": 10, "materials": 4, "research": 5}, "risk": 0.05},
+    {"id": "signal_processing", "name": "Signal Processing", "category": "Computing", "prerequisites": ["basic_computing", "advanced_electronics"], "cost": {"money": 25, "materials": 10, "research": 15}, "risk": 0.12},
+    {"id": "basic_energy", "name": "Basic Energy", "category": "Energy", "cost": {"money": 10, "materials": 4, "research": 5}, "risk": 0.05},
+    {"id": "power_systems", "name": "Power Systems", "category": "Energy", "prerequisites": ["basic_energy"], "cost": {"money": 18, "materials": 10, "research": 8}, "risk": 0.08},
+    {"id": "basic_manufacturing", "name": "Basic Manufacturing", "category": "Manufacturing", "cost": {"money": 10, "materials": 4, "research": 5}, "risk": 0.05},
+    {"id": "precision_manufacturing", "name": "Precision Manufacturing", "category": "Manufacturing", "prerequisites": ["basic_manufacturing", "advanced_electronics"], "cost": {"money": 22, "materials": 14, "research": 10}, "risk": 0.10},
+    {"id": "radar", "name": "Radar / Advanced Communication", "category": "Communication", "prerequisites": ["radio_systems", "signal_processing"], "cost": {"money": 35, "materials": 15, "research": 20}, "risk": 0.20}
+  ],
+  "project": {
+    "id": "long_range_communication",
+    "name": "Long-Range Communication System",
+    "description": "A reliable communication link over very long distances.",
+    "target_progress": 100,
+    "required_for_any_attempt": ["radio_systems"],
+    "standard": {
+      "description": "Conventional full-scale development",
+      "requires_techs": ["advanced_electronics", "power_systems"],
+      "cost": {"money": 100, "materials": 50, "research": 40},
+      "progress": 100,
+      "base_risk": 0.10
+    },
+    "strategy_tags": {
+      "reuse_infrastructure": {"description": "Repurpose existing infrastructure (broadcast, power, manufacturing capacity)", "cost_mult": 0.6, "risk_delta": 0.12, "progress_mult": 0.8, "requires_techs": ["basic_manufacturing"]},
+      "simplify_design": {"description": "Remove components and accept a thinner safety margin", "cost_mult": 0.7, "risk_delta": 0.08, "progress_mult": 0.7},
+      "substitute_materials": {"description": "Replace scarce materials with cheaper substitutes", "cost_mult": 0.8, "risk_delta": 0.10, "progress_mult": 0.9, "requires_techs": ["basic_manufacturing"]},
+      "combine_technologies": {"description": "Combine existing technologies from different fields", "cost_mult": 0.75, "risk_delta": 0.10, "progress_mult": 0.9, "min_techs_used": 2},
+      "partial_solution": {"description": "Deliver reduced coverage now; extend later", "cost_mult": 0.4, "risk_delta": 0.03, "progress_mult": 0.45},
+      "novel_architecture": {"description": "Unproven alternative architecture; high variance", "cost_mult": 0.5, "risk_delta": 0.25, "progress_mult": 1.0, "progress_variance": 0.5, "requires_techs": ["basic_electronics"]}
+    },
+    "failure_reasons": {
+      "standard": [{"reason": "integration failure between subsystems", "lesson": "full-scale integration needs more testing budget than estimated"}],
+      "reuse_infrastructure": [
+        {"reason": "receiver instability", "lesson": "existing receiver architecture is insufficient"},
+        {"reason": "interference from legacy equipment", "lesson": "legacy infrastructure introduces interference at long range"}
+      ],
+      "simplify_design": [{"reason": "insufficient signal margin", "lesson": "removing components pushed signal margin below the reliable threshold"}],
+      "substitute_materials": [{"reason": "component degradation", "lesson": "substitute materials degrade under sustained transmission load"}],
+      "combine_technologies": [{"reason": "subsystem incompatibility", "lesson": "combined subsystems need an adapter layer that was not budgeted"}],
+      "partial_solution": [{"reason": "coverage gaps", "lesson": "partial coverage leaves unreliable regions that must be closed later"}],
+      "novel_architecture": [{"reason": "unproven design failed in testing", "lesson": "novel architectures need smaller incremental tests before a full build"}]
+    }
+  },
+  "countries": {
+    "A": {
+      "name": "Country A",
+      "description": "Limited resources, high risk tolerance, strong pressure for technological advancement.",
+      "risk_tolerance": 0.65, "caution": 0.2, "intel_skill": 0.8, "reserve_fraction": 0.0, "spy_probe_interval": 4,
+      "trade_partners": ["D", "B"],
+      "starting_resources": {"money": 70, "materials": 35, "research": 30},
+      "income": {"money": 5, "materials": 3, "research": 3},
+      "starting_techs": ["basic_electronics", "basic_communication", "basic_manufacturing", "basic_energy"]
+    },
+    "B": {
+      "name": "Country B",
+      "description": "Better resources, cautious, efficiency-focused, strong science, cares about civilian stability.",
+      "risk_tolerance": 0.30, "caution": 0.8, "intel_skill": 1.0, "reserve_fraction": 0.2, "spy_probe_interval": 3,
+      "trade_partners": ["D"],
+      "starting_resources": {"money": 150, "materials": 80, "research": 60},
+      "income": {"money": 15, "materials": 8, "research": 8},
+      "starting_techs": ["basic_electronics", "basic_communication", "basic_manufacturing", "basic_energy", "basic_computing"]
+    },
+    "D": {
+      "name": "Country D",
+      "description": "Neutral, intelligent, strategically cautious, strong intelligence; prioritises independence and security.",
+      "risk_tolerance": 0.35, "caution": 0.9, "intel_skill": 1.6, "reserve_fraction": 0.15, "spy_probe_interval": 2,
+      "trade_partners": ["A", "B"],
+      "starting_resources": {"money": 100, "materials": 55, "research": 40},
+      "income": {"money": 10, "materials": 5, "research": 5},
+      "starting_techs": ["basic_electronics", "basic_communication", "basic_manufacturing", "basic_computing"]
+    }
+  }
+}
