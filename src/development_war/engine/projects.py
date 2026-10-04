@@ -84,6 +84,17 @@ def _clamp(x: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, x))
 
 
+def required_techs(rules: ProjectRules, p: Proposal) -> set[str]:
+    """Technologies a country must already own before it may attempt this proposal."""
+    needed = set(rules.required_for_any_attempt)
+    if not p.tags:
+        needed |= set(rules.standard.requires_techs)
+    for t in p.tags:
+        if t in rules.strategy_tags:
+            needed |= set(rules.strategy_tags[t].requires_techs)
+    return needed
+
+
 def quote_proposal(rules: ProjectRules, graph: TechGraph, owned: set[str] | frozenset[str], p: Proposal) -> Quote:
     problems: list[str] = []
     std = rules.standard
@@ -101,13 +112,7 @@ def quote_proposal(rules: ProjectRules, graph: TechGraph, owned: set[str] | froz
         elif tech not in owned:
             problems.append(f"uses technology not acquired: '{tech}'")
 
-    needed = set(rules.required_for_any_attempt)
-    if not p.tags:
-        needed |= set(std.requires_techs)
-    for t in p.tags:
-        if t in rules.strategy_tags:
-            needed |= set(rules.strategy_tags[t].requires_techs)
-    missing = sorted(n for n in needed if n not in owned)
+    missing = sorted(n for n in required_techs(rules, p) if n not in owned)
     if missing:
         problems.append(f"missing required technologies: {', '.join(missing)}")
 
