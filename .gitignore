@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets / local config
+.env
+.env.*
+*.pem
+*.key
+secrets.*
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Local experiment output (curated examples live in docs/example-run/)
+experiments/results/
+*.log
