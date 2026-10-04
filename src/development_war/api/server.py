@@ -52,6 +52,10 @@ def create_app(simulator: Optional[Simulator] = None) -> FastAPI:
         if token is None or not secrets.compare_digest(token, expected):
             raise HTTPException(403, "invalid admin token")
 
+    @app.get("/")
+    def root() -> dict:
+        return {"name": "Development War", "docs": "/docs", "state": "/simulation/state"}
+
     @app.get("/simulation/state")
     def state() -> dict:
         """Public state only: no resources, technologies or hidden parameters."""

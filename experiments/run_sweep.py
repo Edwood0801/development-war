@@ -9,6 +9,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
+from pathlib import Path
+
+# Make `python experiments/run_sweep.py` work from the repo root (script dir is not the repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from experiments.conditions import CONDITIONS, make_config
 from development_war.engine.simulator import Simulator

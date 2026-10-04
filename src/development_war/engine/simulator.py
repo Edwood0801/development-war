@@ -116,7 +116,9 @@ class Simulator:
 
     def export_history(self, path: Union[str, Path], truth: bool = True) -> None:
         events = self.world.log.all() if truth else self.world.log.public()
-        Path(path).write_text("\n".join(e.model_dump_json() for e in events) + "\n")
+        out = Path(path)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text("\n".join(e.model_dump_json() for e in events) + "\n", encoding="utf-8")
 
     def summary(self) -> dict:
         w = self.world
