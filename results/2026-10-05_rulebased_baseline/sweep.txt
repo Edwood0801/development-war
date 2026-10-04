@@ -1,0 +1,16 @@
+condition                  country completed attempts failures approaches
+A_100pct                   A           11/20      2.6      1.1        2.4
+A_100pct                   B           20/20      2.4      0.2        2.3
+A_100pct                   D           19/20      2.8      0.6        2.4
+B_70pct                    A            9/20      2.9      1.0        1.2
+B_70pct                    B           20/20      3.0      0.8        2.5
+B_70pct                    D           10/20      3.6      0.8        2.2
+C_40pct                    A            0/20      0.9      0.3        0.9
+C_40pct                    B            5/20      2.9      0.6        1.9
+C_40pct                    D            0/20      1.9      0.5        1.6
+D_20pct                    A            0/20      0.0      0.0        0.0
+D_20pct                    B            0/20      0.9      0.2        0.9
+D_20pct                    D            0/20      0.0      0.0        0.0
+E_20pct_incomplete_info    A            0/20      0.0      0.0        0.0
+E_20pct_incomplete_info    B            0/20      0.9      0.2        0.9
+E_20pct_incomplete_info    D            0/20      0.0      0.0        0.0
