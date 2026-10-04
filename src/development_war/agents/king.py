@@ -31,6 +31,14 @@ class RuleBasedKing(BaseKing):
         reserve = own.resources.scaled(self.profile.reserve_fraction)
         spendable = own.resources - reserve
         remaining = max(1, rules.target_progress - own.project_progress)
+        # Everything this country could possibly have by the end: do not chase what it can never pay for.
+        horizon = own.resources + own.income.scaled(max(0, obs.turns_remaining - 1))
+
+        def reachable(cost: Resources, techs: list[str]) -> bool:
+            need = cost
+            for t in graph.path_to(owned, techs):
+                need = need + graph.get(t).cost
+            return horizon.covers(need)
 
         def score(prop: Proposal) -> Optional[tuple[float, int, Proposal]]:
             q = quote_proposal(rules, graph, owned, prop)
@@ -54,6 +62,8 @@ class RuleBasedKing(BaseKing):
                 continue
             q = quote_proposal(rules, graph, owned, ev.proposal)
             value = min(q.est_progress, remaining) * (1 - ev.est_risk) / max(1, q.cost.total())
+            if not reachable(q.cost, ev.missing_techs):
+                continue
             if ev.missing_techs:
                 blocked.append((value, q.cost.total(), ev))
             elif ev.feasible and not ev.affordable:

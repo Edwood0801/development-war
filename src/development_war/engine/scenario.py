@@ -34,6 +34,9 @@ class Scenario(BaseModel):
     technologies: list[Technology]
     project: ProjectRules
     countries: dict[str, CountryProfile]
+    # Engine-private world parameters: never copied into an Observation.
+    hidden_risk_bias_range: tuple[float, float] = (-0.08, 0.12)
+    hidden_progress_bias_range: tuple[float, float] = (0.85, 1.10)
 
     def tech_graph(self) -> TechGraph:
         return TechGraph(self.technologies)

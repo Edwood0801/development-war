@@ -58,8 +58,8 @@ class World:
         rules = scenario.project
         keys = ["standard"] + sorted(rules.strategy_tags)
         self.hidden = HiddenState(
-            risk_bias={k: round(rng.uniform(*rules.hidden_risk_bias_range), 3) for k in keys},
-            progress_bias={k: round(rng.uniform(*rules.hidden_progress_bias_range), 3) for k in keys},
+            risk_bias={k: round(rng.uniform(*scenario.hidden_risk_bias_range), 3) for k in keys},
+            progress_bias={k: round(rng.uniform(*scenario.hidden_progress_bias_range), 3) for k in keys},
         )
         self.log.add(0, "world_created", visible_to=[], seed=self.config.seed, hidden=self.hidden.model_dump())
 

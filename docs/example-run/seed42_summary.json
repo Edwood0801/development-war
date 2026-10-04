@@ -1,0 +1,102 @@
+{
+  "seed": 42,
+  "turns_played": 12,
+  "finished": true,
+  "countries": {
+    "A": {
+      "completed_turn": null,
+      "project_progress": 86,
+      "project_attempts": 3,
+      "project_failures": 1,
+      "tech_attempts": 1,
+      "tech_failures": 0,
+      "distinct_approaches_tried": [
+        "novel_architecture",
+        "novel_architecture+partial_solution+simplify_design",
+        "partial_solution+reuse_infrastructure+simplify_design"
+      ],
+      "technologies": [
+        "basic_communication",
+        "basic_electronics",
+        "basic_energy",
+        "basic_manufacturing",
+        "radio_systems"
+      ],
+      "spent": {
+        "money": 109,
+        "materials": 50,
+        "research": 44
+      },
+      "final_resources": {
+        "money": 16,
+        "materials": 24,
+        "research": 27
+      },
+      "lessons": 3
+    },
+    "B": {
+      "completed_turn": 3,
+      "project_progress": 100,
+      "project_attempts": 2,
+      "project_failures": 0,
+      "tech_attempts": 1,
+      "tech_failures": 0,
+      "distinct_approaches_tried": [
+        "combine_technologies",
+        "partial_solution"
+      ],
+      "technologies": [
+        "basic_communication",
+        "basic_computing",
+        "basic_electronics",
+        "basic_energy",
+        "basic_manufacturing",
+        "radio_systems"
+      ],
+      "spent": {
+        "money": 138,
+        "materials": 62,
+        "research": 53
+      },
+      "final_resources": {
+        "money": 192,
+        "materials": 114,
+        "research": 103
+      },
+      "lessons": 2
+    },
+    "D": {
+      "completed_turn": null,
+      "project_progress": 99,
+      "project_attempts": 5,
+      "project_failures": 2,
+      "tech_attempts": 1,
+      "tech_failures": 0,
+      "distinct_approaches_tried": [
+        "combine_technologies",
+        "novel_architecture+partial_solution",
+        "partial_solution+reuse_infrastructure"
+      ],
+      "technologies": [
+        "basic_communication",
+        "basic_computing",
+        "basic_electronics",
+        "basic_manufacturing",
+        "radio_systems"
+      ],
+      "spent": {
+        "money": 194,
+        "materials": 88,
+        "research": 75
+      },
+      "final_resources": {
+        "money": 28,
+        "materials": 24,
+        "research": 20
+      },
+      "lessons": 5
+    }
+  },
+  "first_to_complete": "B",
+  "constraint_records": 10
+}

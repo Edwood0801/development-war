@@ -55,8 +55,6 @@ class ProjectRules(BaseModel):
     max_tags: int = 3
     risk_floor: float = 0.03
     risk_ceiling: float = 0.90
-    hidden_risk_bias_range: tuple[float, float] = (-0.08, 0.12)
-    hidden_progress_bias_range: tuple[float, float] = (0.85, 1.10)
 
 
 class Proposal(BaseModel):
